@@ -38,7 +38,7 @@ export class AddReviewUsecaseImpl implements AddReviewUsecase {
 
     const outbox = new OutboxEvent(
       uuidv4(),
-      event.type,
+      ReviewAddedEvent.type,
       { reviewId: event.reviewId },
       OutboxEventEnum.Pending,
       new Date(),
