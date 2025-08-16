@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: "main-backend"
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - backend/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+
+  worker:
+    container_name: "worker-pull"
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    env_file:
+      - worker/.env
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    container_name: "redis"
+    command: ["redis-server", "--requirepass", "redis"]
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgres:
+    container_name: "postgres-database"
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

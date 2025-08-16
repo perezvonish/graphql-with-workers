@@ -1,8 +1,3 @@
-node_modules
-dist
-npm-debug.log
-pnpm-debug.log
-.idea
-.vscode
-coverage
-.env
+**/node_modules
+**/dist
+**/.env
