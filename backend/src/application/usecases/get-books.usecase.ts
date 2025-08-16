@@ -12,6 +12,10 @@ export class GetBookUsecaseImpl implements GetBooksUsecase {
   ) {}
 
   async execute(): Promise<Book[]> {
-    return await this.bookRepository.findAll();
+    return await this.bookRepository.findAll({
+      relations: {
+        reviews: true,
+      },
+    });
   }
 }

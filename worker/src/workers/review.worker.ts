@@ -3,11 +3,17 @@ import { BaseWorker } from '../types';
 import { v4 } from 'uuid';
 import { AddReviewType } from '../types/add-review.type';
 import { getReviewById, updateReviewWithStatus } from '../services';
-import { Filter } from 'bad-words';
+import Filter from 'bad-words';
 
 export class ReviewWorker extends BaseWorker {
   name: string;
-  private redis = createClient();
+  private redis = createClient({
+    socket: {
+      host: process.env.REDIS_HOST,
+      port: Number(process.env.REDIS_PORT),
+    },
+    password: process.env.REDIS_PASSWORD,
+  });
 
   private readonly filter = new Filter();
 

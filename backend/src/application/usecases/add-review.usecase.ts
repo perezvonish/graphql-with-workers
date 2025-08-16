@@ -45,7 +45,7 @@ export class AddReviewUsecaseImpl implements AddReviewUsecase {
     );
 
     await this.trx.executeInTransaction(async () => {
-      await this.reviewRepo.save(review);
+      await this.bookRepository.save(book);
       await this.outboxRepo.save(outbox);
     });
 
