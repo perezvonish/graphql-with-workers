@@ -57,10 +57,10 @@ export class OutboxDispatcher implements OnModuleInit {
         return;
       }
 
-      const parsed: ReviewAddedEvent = plainToInstance(
-        ReviewAddedEvent,
-        event.payload,
-      );
+      const parsed: ReviewAddedEvent = plainToInstance(ReviewAddedEvent, {
+        ...event.payload,
+        outboxId: event.id,
+      });
 
       const jobId = `review-created:${parsed.reviewId}`;
 
