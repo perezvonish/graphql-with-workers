@@ -1,5 +1,5 @@
 export class ReviewAddedEvent {
-  readonly type = 'review.created';
+  static readonly type = 'review.created';
 
   constructor(public readonly reviewId: string) {}
 }
