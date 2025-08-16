@@ -61,7 +61,7 @@ cd ../worker && npm install
 
 ### 3. Setup environment
 
-Copy `.env.example` to `.env` and configure:
+Already done, anyway you can make any changes what you want.
 
 ```env
 # PostgreSQL
